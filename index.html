@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayroqlar Quiz</title>
+    <script src="script.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2F4F4F',
+                        secondary: '#5f9ea0',
+                        accent: '#ffd700'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-primary to-secondary min-h-screen">
+    <!-- Start Screen -->
+    <div id="startScreen" class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="w-32 h-32 bg-white rounded-full mb-8 flex items-center justify-center shadow-lg animate-pulse">
+            <span class="text-4xl font-bold text-primary">Flags</span>
+            <p class="text-accent font-bold">Game</p>
+        </div>
+        <input type="text" id="playerName" placeholder="Ismingizni kiriting" class="w-full max-w-sm px-6 py-4 rounded-full bg-white/10 border-2 border-white/30 text-white placeholder-white/70 text-lg mb-8 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 backdrop-blur-sm">
+        <button onclick="startGame()" class="w-full max-w-sm px-6 py-4 rounded-full bg-accent text-primary text-xl font-bold hover:transform hover:-translate-y-1 transition-all hover:shadow-lg">Boshlash</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white rounded-3xl shadow-xl p-8">
+            <div class="flex justify-between items-center mb-6 px-4 py-2 bg-gray-50 rounded-full">
+                <div class="text-lg font-semibold text-primary">
+                    <span id="currentQuestion">1</span>/10
+                </div>
+                <div class="text-lg font-semibold text-primary">
+                    Ball: <span id="score">0</span>
+                </div>
+            </div>
+
+            <div class="relative w-20 h-20 mx-auto mb-8">
+                <div id="timerCircle" class="w-full h-full rounded-full bg-secondary"></div>
+                <div id="timer" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-white">15</div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-2xl mb-8">
+                <img id="flag" src="" alt="Country Flag" class="w-full max-w-xs mx-auto rounded-lg shadow-md hover:transform hover:scale-105 transition-transform">
+            </div>
+
+            <div id="question" class="text-xl font-semibold text-primary text-center mb-8"></div>
+
+            <div id="options" class="grid grid-cols-2 gap-4"></div>
+
+            <div id="message" class="min-h-[1.5rem] text-center text-lg font-medium text-primary mt-6"></div>
+
+            <button id="nextButton" onclick="nextQuestion()" class="hidden w-full px-6 py-4 mt-8 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xl font-semibold hover:transform hover:-translate-y-1 transition-all">Keyingisi</button>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="hidden min-h-screen flex flex-col items-center justify-center p-4 animate-fade-in">
+        <h1 class="text-4xl font-bold text-white mb-12 text-shadow">Natijalar</h1>
+        
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl flex items-center mb-8 w-full max-w-sm">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Player Avatar" class="w-16 h-16 rounded-full border-4 border-accent mr-6">
+            <span id="resultPlayerName" class="text-xl font-semibold text-white flex-grow"></span>
+            <span class="text-2xl font-bold text-accent"><span id="finalScore">0</span>/10</span>
+        </div>
+
+        <div id="resultMessage" class="text-2xl text-accent text-center mb-10 text-shadow max-w-sm"></div>
+
+        <button onclick="restartGame()" class="w-full max-w-sm px-6 py-4 rounded-full bg-accent text-primary text-xl font-bold hover:transform hover:-translate-y-1 transition-all hover:shadow-lg">Qayta o'ynash</button>
+    </div>
+
+  
+</body>
+</html>
